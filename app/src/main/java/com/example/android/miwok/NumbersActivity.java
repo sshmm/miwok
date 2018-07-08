@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class NumbersActivity extends AppCompatActivity {
 
@@ -15,8 +16,6 @@ public class NumbersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
-        //String [] words = new String[10];
-        /*String [] words = {"one", "two","three","four","five","six","seven","eight","nine","ten"};*/
 
         //Creating Array of Words
         ArrayList<String> words = new ArrayList<String>();
@@ -31,15 +30,22 @@ public class NumbersActivity extends AppCompatActivity {
         words.add("Nine");
         words.add("Ten");
 
+        //Find the root view of the Layout
         LinearLayout rootView = (LinearLayout) findViewById(R.id.rootView);
 
-        TextView[] wordsView = new TextView[10];
-
+         // Create a variable to keep track of the current index position
         int wordsCount = 0;
         while (wordsCount < 10){
-            wordsView[wordsCount] = new TextView(this);
-            wordsView[wordsCount].setText(words.get(wordsCount));
-            rootView.addView(wordsView[wordsCount]);
+            // Create a new TextView
+            TextView wordsView = new TextView(this);
+
+            // Set the text to be word at the current index
+            wordsView.setText(words.get(wordsCount));
+
+            // Add this TextView as another child to the root view of this layout
+            rootView.addView(wordsView);
+
+            // Increment the index variable by 1
             wordsCount++;
         }
 
