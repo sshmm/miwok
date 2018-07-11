@@ -4,7 +4,9 @@ import android.graphics.LinearGradient;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,33 +20,24 @@ public class NumbersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_numbers);
 
         //Creating Array of Words
-        ArrayList<String> words = new ArrayList<String>();
-        words.add("One");
-        words.add("Two");
-        words.add("Three");
-        words.add("Four");
-        words.add("Five");
-        words.add("Six");
-        words.add("Seven");
-        words.add("Eight");
-        words.add("Nine");
-        words.add("Ten");
+        ArrayList<Word> words = new ArrayList<Word>();
 
-        //Find the root view of the Layout
-        LinearLayout rootView = (LinearLayout) findViewById(R.id.rootView);
+        words.add(new Word("one", "lutti"));
+        words.add(new Word("two", "otiiko"));
+        words.add(new Word("three", "tolookosu"));
+        words.add(new Word("four", "oyyisa"));
+        words.add(new Word("five", "massokka"));
+        words.add(new Word("six", "temmokka"));
+        words.add(new Word("seven", "kenekaku"));
+        words.add(new Word("eight", "kawinta"));
+        words.add(new Word("nine", "wo’e"));
+        words.add(new Word("ten", "na’aacha"));
 
-        // Keep looping until we've reached the end of the list
-        for (int wordsCount = 0; wordsCount < 10; wordsCount++){
-            // Create a new TextView
-            TextView wordsView = new TextView(this);
+        WordAdapter itemsAdapter = new WordAdapter(this, words);
 
-            // Set the text to be word at the current index
-            wordsView.setText(words.get(wordsCount));
+        ListView listView = (ListView) findViewById(R.id.list);
 
-            // Add this TextView as another child to the root view of this layout
-            rootView.addView(wordsView);
-        }
-
+        listView.setAdapter(itemsAdapter);
 
 
     }
