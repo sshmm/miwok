@@ -7,15 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
+    /** Resource ID for the background color for this list of words */
+    private int mCategoryColorId;
 
-    public WordAdapter(Context context, ArrayList<Word> Words) {
+    public WordAdapter(Context context, ArrayList<Word> Words,int CategoryColorId) {
         super(context, 0, Words);
+        mCategoryColorId= CategoryColorId;
     }
 
     @NonNull
@@ -43,6 +48,24 @@ public class WordAdapter extends ArrayAdapter<Word> {
         // set this text on the default TextView
         defaultTranslationView.setText(currentWord.getDefaultTranslation());
 
+        // Find the ImageView in the list_item.xml layout with the ID image
+        ImageView wordImageView = (ImageView) listItemView.findViewById(R.id.image);
+
+        //check if the current word has an image or not and modify the visibility accordingly
+        wordImageView.setVisibility(View.GONE);
+        if (currentWord.hasImage()){
+            // Get the image resource id from the current Word object
+            wordImageView.setImageResource(currentWord.getmImageResourceId());
+            //maake sure that the image is visible
+            wordImageView.setVisibility(View.VISIBLE);
+        }
+
+        // Set the theme color for the list item
+        View textContainer = listItemView.findViewById(R.id.text_container);
+        // Find the color that the resource ID maps to
+        int color = ContextCompat.getColor(getContext(),mCategoryColorId);
+        // Set the background color of the text container View
+        textContainer.setBackgroundColor(color);
         return listItemView;
     }
 }

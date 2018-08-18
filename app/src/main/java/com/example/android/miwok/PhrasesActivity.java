@@ -30,7 +30,7 @@ public class PhrasesActivity extends AppCompatActivity {
 
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
-        WordAdapter phrasesAdapter = new WordAdapter(this, phrases);
+        WordAdapter phrasesAdapter = new WordAdapter(this, phrases,R.color.category_phrases);
 
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
